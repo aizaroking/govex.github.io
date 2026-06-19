@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIZARO KING</title>
+    <title>Aizaro King</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             background: linear-gradient(135deg, #0f172a, #1e293b);
@@ -41,12 +42,20 @@
             padding: 15px;
             margin: 12px 0;
             border-radius: 12px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             color: white;
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
             transition: all 0.3s ease;
+        }
+        .link-card i {
+            font-size: 22px;
+            width: 25px;
+            text-align: center;
         }
         .link-card:hover {
             background: #00d2ff;
@@ -59,14 +68,32 @@
 <body>
 
     <img src="https://via.placeholder.com/100" alt="Aizaro" class="profile-img">
+    
     <h1>AIZARO KING</h1>
     <div class="location">📍 Morocco</div>
 
     <div class="links-container">
-        <a href="https://discord.com" target="_blank" class="link-card">Discord 💬</a>
-        <a href="https://t.me" target="_blank" class="link-card">Telegram ✈️</a>
-        <a href="https://github.com/aizaroking" target="_blank" class="link-card">GitHub 🐙</a>
+        <a href="https://discord.com/invite/5b9N3kaTb9" target="_blank" class="link-card">
+            <i class="fab fa-discord" style="color: #5865F2;"></i> Discord
+        </a>
+        
+        <a href="https://t.me/addlist/ucGIsjr5HtRjNjc8" target="_blank" class="link-card">
+            <i class="fab fa-telegram" style="color: #24A1DE;"></i> Telegram
+        </a>
+        
+        <a href="https://youtube.com/@aizaroking" target="_blank" class="link-card">
+            <i class="fab fa-youtube" style="color: #FF0000;"></i> YouTube
+        </a>
+
+        <a href="https://tiktok.com/@aizaroking" target="_blank" class="link-card">
+            <i class="fab fa-tiktok" style="color: #000000;"></i> TikTok
+        </a>
+
+        <a href="https://instagram.com/aizaroking" target="_blank" class="link-card">
+            <i class="fab fa-instagram" style="color: #E1306C;"></i> Instagram
+        </a>
     </div>
 
 </body>
 </html>
+
