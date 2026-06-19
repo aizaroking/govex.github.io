@@ -7,49 +7,83 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
     <style>
+        /* إعدادات الخلفية السوداء */
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background-color: #000000;
             color: white;
             font-family: 'Poppins', Arial, sans-serif;
-            text-align: center;
-            padding: 40px 20px;
             margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
+
+        /* حاوية النقاط المتحركة الخلفية */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* كرت الواجهة الزجاجي الأسود في المنتصف */
+        .profile-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(15, 15, 15, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px 25px;
+            border-radius: 24px;
+            max-width: 380px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            margin: 20px;
+        }
+
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 3px solid #00d2ff;
-            box-shadow: 0 0 15px #00d2ff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
             object-fit: cover;
         }
+
         h1 {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             margin: 15px 0 5px;
             letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
+
         .location {
-            color: #94a3b8;
+            color: #8a99ad;
             font-size: 15px;
             font-weight: 400;
             margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
         }
+
         .links-container {
-            max-width: 400px;
-            margin: 0 auto;
+            width: 100%;
         }
+
+        /* أزرار الروابط السوداء ذات الإطار المضيء */
         .link-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            margin: 12px 0;
-            border-radius: 12px;
+            padding: 14px;
+            margin: 14px 0;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,49 +92,123 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .link-card i {
-            font-size: 22px;
+            font-size: 20px;
             width: 25px;
             text-align: center;
         }
+
+        /* تأثير التمرير الفخم فوق الأزرار */
         .link-card:hover {
-            background: #00d2ff;
-            color: #0f172a;
-            box-shadow: 0 0 15px #00d2ff;
-            transform: translateY(-2px);
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+            border-color: #ffffff;
+        }
+        
+        .link-card:hover i {
+            color: #000000 !important;
         }
     </style>
 </head>
 <body>
 
-    <img src="profile.png" alt="Aizaro" class="profile-img">
-    
-    <h1>AIZARO KING</h1>
-    <div class="location">Morocco 🇲🇦</div>
+    <canvas id="particles-canvas"></canvas>
 
-    <div class="links-container">
-        <a href="https://discord.com/invite/5b9N3kaTb9" target="_blank" class="link-card">
-            <i class="fab fa-discord" style="color: #5865F2;"></i> Discord
-        </a>
+    <div class="profile-card">
+        <img src="profile.png" alt="Aizaro" class="profile-img">
         
-        <a href="https://t.me/addlist/ucGIsjr5HtRjNjc8" target="_blank" class="link-card">
-            <i class="fab fa-telegram" style="color: #24A1DE;"></i> Telegram
-        </a>
-        
-        <a href="https://youtube.com/@aizaroking" target="_blank" class="link-card">
-            <i class="fab fa-youtube" style="color: #FF0000;"></i> YouTube
-        </a>
+        <h1>AIZARO KING</h1>
+        <div class="location">Morocco 🇲🇦</div>
 
-        <a href="https://tiktok.com/@aizaroking" target="_blank" class="link-card">
-            <i class="fab fa-tiktok" style="color: #000000;"></i> TikTok
-        </a>
+        <div class="links-container">
+            <a href="https://discord.com/invite/5b9N3kaTb9" target="_blank" class="link-card">
+                <i class="fab fa-discord" style="color: #5865F2;"></i> Discord
+            </a>
+            
+            <a href="https://t.me/addlist/ucGIsjr5HtRjNjc8" target="_blank" class="link-card">
+                <i class="fab fa-telegram" style="color: #24A1DE;"></i> Telegram
+            </a>
+            
+            <a href="https://youtube.com/@aizaroking" target="_blank" class="link-card">
+                <i class="fab fa-youtube" style="color: #FF0000;"></i> YouTube
+            </a>
 
-        <a href="https://instagram.com/aizaroking" target="_blank" class="link-card">
-            <i class="fab fa-instagram" style="color: #E1306C;"></i> Instagram
-        </a>
+            <a href="https://tiktok.com/@aizaroking" target="_blank" class="link-card">
+                <i class="fab fa-tiktok" style="color: #FFFFFF;"></i> TikTok
+            </a>
+
+            <a href="https://instagram.com/aizaroking" target="_blank" class="link-card">
+                <i class="fab fa-instagram" style="color: #E1306C;"></i> Instagram
+            </a>
+        </div>
     </div>
 
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 60; // عدد النقاط المضيئة المتحركة
+
+        // ضبط حجم الخلفية ليناسب حجم شاشة الهاتف أو الكمبيوتر تماماً
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        // بناء النقطة وخصائص حركتها
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5; // حجم النقطة
+                this.speedX = Math.random() * 0.5 - 0.25; // سرعة الحركة الأفقية
+                this.speedY = Math.random() * 0.5 - 0.25; // سرعة الحركة الرأسية
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // إعادة النقطة للشاشة إذا خرجت عن الحدود
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        init();
+
+        // تكرار الحركة وتحديث الإطارات بشكل سلس جداً لتبدو كأنها حية
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
