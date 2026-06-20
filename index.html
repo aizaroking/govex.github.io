@@ -37,7 +37,7 @@
             border: 1px solid rgba(0, 210, 255, 0.1); 
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 30px 20px;
+            padding: 25px 20px 20px;
             border-radius: 24px;
             max-width: 320px;
             width: 85%;
@@ -47,33 +47,13 @@
             animation: cardAppear 0.8s ease-out forwards;
         }
 
-        /* حاوية الصورة مع نقطة الحالة */
-        .avatar-container {
-            position: relative;
+        .profile-img {
             width: 90px;
             height: 90px;
-            margin: 0 auto;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
             border-radius: 50%;
             border: 2px solid #00d2ff;
             object-fit: cover;
-        }
-
-        /* نقطة الحالة المتغيرة */
-        .status-dot {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 3px solid #04121a;
-            background-color: #747f8d; /* الافتراضي رمادي */
-            transition: background-color 0.3s ease;
+            animation: glowPulse 2s infinite alternate;
         }
 
         h1 {
@@ -99,7 +79,7 @@
             color: #a0aec0;
             font-size: 13px;
             font-weight: 500;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -108,13 +88,14 @@
 
         .links-container {
             width: 100%;
+            margin-bottom: 15px;
         }
 
         .link-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(0, 210, 255, 0.12); 
             padding: 12px 16px;
-            margin: 14px 0;
+            margin: 12px 0;
             border-radius: 50px;
             display: flex;
             align-items: center;
@@ -197,6 +178,83 @@
             color: #ffffff;
         }
 
+        .discord-status-widget {
+            background: rgba(2, 11, 16, 0.6);
+            border: 1px solid rgba(0, 210, 255, 0.15);
+            border-radius: 16px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            margin-top: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .discord-status-widget:hover {
+            background: rgba(88, 101, 242, 0.1);
+            border-color: rgba(88, 101, 242, 0.6);
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .widget-avatar-wrapper {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .widget-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .widget-status-dot {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #04121a;
+            background-color: #747f8d;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .widget-info {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .widget-username {
+            font-weight: 600;
+            font-size: 13px;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        .widget-status-text {
+            font-size: 11px;
+            color: #a0aec0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @keyframes glowPulse {
+            from { box-shadow: 0 0 8px rgba(0, 210, 255, 0.3); }
+            to { box-shadow: 0 0 22px rgba(0, 210, 255, 0.6); }
+        }
+
         @keyframes cardAppear {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -212,17 +270,14 @@
     <canvas id="particles-canvas"></canvas>
 
     <div class="profile-card">
-        <div class="avatar-container">
-            <img src="profile.png" alt="Aizaro" class="profile-img" id="discord-avatar">
-            <div class="status-dot" id="discord-status"></div>
-        </div>
+        <img src="https://cdn.discordapp.com/avatars/1285381904559767594/40ccf6b216964ef5bc844788107efca6.png?size=256" alt="Aizaro" class="profile-img">
         
         <h1>AIZARO KING</h1>
         <div class="bio">Gamer & Content Creator</div>
         <div class="location">Morocco <span class="flag">🇲🇦</span></div>
 
         <div class="links-container">
-            <a href="https://discord.com/invite/5b9N3kaTb9" target="_blank" class="link-card discord-btn">
+            <a href="https://discord.com/users/1285381904559767594" target="_blank" class="link-card discord-btn">
                 <div class="icon-badge"><i class="fab fa-discord"></i></div>
                 <div class="link-text">Discord</div>
             </a>
@@ -252,10 +307,35 @@
                 <div class="link-text">Private Message</div>
             </a>
         </div>
+
+        <a href="https://discord.com/users/1285381904559767594" target="_blank" class="discord-status-widget">
+            <div class="widget-avatar-wrapper">
+                <img src="https://cdn.discordapp.com/avatars/1285381904559767594/40ccf6b216964ef5bc844788107efca6.png?size=256" id="w-avatar" class="widget-avatar" alt="Discord Avatar">
+                <div id="w-status-dot" class="widget-status-dot"></div>
+            </div>
+            <div class="widget-info">
+                <div id="w-username" class="widget-username">aymane</div>
+                <div id="w-status-text" class="widget-status-text">loading...</div>
+            </div>
+        </a>
     </div>
 
     <script>
-        const DISCORD_ID = "1285381904559767594"; 
+        const DISCORD_ID = "1285381904559767594";
+        let lastOnlineTime = localStorage.getItem('last_online_time') || Date.now();
+
+        function timeAgo(timestamp) {
+            const now = Date.now();
+            const diff = now - timestamp;
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+
+            if (minutes < 1) return "just now";
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            return "offline";
+        }
 
         async function fetchDiscordStatus() {
             try {
@@ -265,24 +345,49 @@
                 if (data.success && data.data) {
                     const user = data.data;
                     
-                    if(user.discord_user.avatar) {
-                        const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.discord_user.avatar}.png?size=256`;
-                        document.getElementById('discord-avatar').src = avatarUrl;
+                    if (user.discord_user && user.discord_user.username) {
+                        document.getElementById('w-username').innerText = user.discord_user.username;
                     }
 
-                    const statusDot = document.getElementById('discord-status');
+                    if(user.discord_user && user.discord_user.avatar) {
+                        const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.discord_user.avatar}.png?size=256`;
+                        document.getElementById('w-avatar').src = avatarUrl;
+                    }
+
+                    const statusDot = document.getElementById('w-status-dot');
+                    const statusText = document.getElementById('w-status-text');
+
+                    let customStatus = "";
+                    if (user.activities && user.activities.length > 0) {
+                        const game = user.activities.find(act => act.type === 0);
+                        if (game) {
+                            customStatus = `Playing ${game.name}`;
+                        } else if (user.activities[0].state) {
+                            customStatus = user.activities[0].state;
+                        }
+                    }
+
+                    if (user.discord_status !== 'offline') {
+                        lastOnlineTime = Date.now();
+                        localStorage.setItem('last_online_time', lastOnlineTime);
+                    }
+
                     switch (user.discord_status) {
                         case 'online':
-                            statusDot.style.backgroundColor = '#23a55a'; 
+                            statusDot.style.backgroundColor = '#23a55a';
+                            statusText.innerText = customStatus ? customStatus : "online";
                             break;
                         case 'idle':
-                            statusDot.style.backgroundColor = '#f0b232'; 
+                            statusDot.style.backgroundColor = '#f0b232';
+                            statusText.innerText = customStatus ? customStatus : "idle";
                             break;
                         case 'dnd':
-                            statusDot.style.backgroundColor = '#f23f43'; 
+                            statusDot.style.backgroundColor = '#f23f43';
+                            statusText.innerText = customStatus ? customStatus : "do not disturb";
                             break;
                         default:
-                            statusDot.style.backgroundColor = '#747f8d'; 
+                            statusDot.style.backgroundColor = '#747f8d';
+                            statusText.innerText = `last seen ${timeAgo(parseInt(lastOnlineTime))}`;
                     }
                 }
             } catch (error) {
@@ -291,9 +396,8 @@
         }
         
         fetchDiscordStatus();
-        setInterval(fetchDiscordStatus, 30000); 
+        setInterval(fetchDiscordStatus, 15000);
 
-        // خلفية الجزيئات المتحركة
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
