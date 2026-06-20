@@ -1,107 +1,86 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aizaro King</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
-    <style>
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            /* تغيير الخط ليصبح ناعم وعصري مثل الصورة المرفقة */
-            font-family: 'Poppins', Arial, sans-serif;
-            text-align: center;
-            padding: 40px 20px;
-            margin: 0;
-        }
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid #00d2ff;
-            box-shadow: 0 0 15px #00d2ff;
-            object-fit: cover;
-        }
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 15px 0 5px;
-            letter-spacing: 1px;
-        }
-        .location {
-            color: #94a3b8;
-            font-size: 15px;
-            font-weight: 400;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .links-container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        .link-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            margin: 12px 0;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .link-card i {
-            font-size: 22px;
-            width: 25px;
-            text-align: center;
-        }
-        .link-card:hover {
-            background: #00d2ff;
-            color: #0f172a;
-            box-shadow: 0 0 15px #00d2ff;
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
-<body>
-
-    <img src="profile.png" alt="Aizaro" class="profile-img">
-    
-    <h1>AIZARO KING</h1>
-    <div class="location">Morocco 🇲🇦</div>
-
-    <div class="links-container">
-        <a href="https://discord.com/invite/5b9N3kaTb9" target="_blank" class="link-card">
-            <i class="fab fa-discord" style="color: #5865F2;"></i> Discord
-        </a>
-        
-        <a href="https://t.me/addlist/ucGIsjr5HtRjNjc8" target="_blank" class="link-card">
-            <i class="fab fa-telegram" style="color: #24A1DE;"></i> Telegram
-        </a>
-        
-        <a href="https://youtube.com/@aizaroking" target="_blank" class="link-card">
-            <i class="fab fa-youtube" style="color: #FF0000;"></i> YouTube
-        </a>
-
-        <a href="https://tiktok.com/@aizaroking" target="_blank" class="link-card">
-            <i class="fab fa-tiktok" style="color: #000000;"></i> TikTok
-        </a>
-
-        <a href="https://instagram.com/aizaroking" target="_blank" class="link-card">
-            <i class="fab fa-instagram" style="color: #E1306C;"></i> Instagram
-        </a>
+<a href="https://t.me/aymane" target="_blank" class="link-card chat-btn">
+                <div class="icon-badge"><i class="fab fa-telegram-plane"></i></div>
+                <div class="link-text">Private Message</div>
+            </a>
+        </div>
     </div>
 
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        const maxDistance = 100;
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(0, 210, 255, 0.4)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            const numberOfParticles = Math.floor((canvas.width * canvas.height) / 9000);
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    const dx = particlesArray[a].x - particlesArray[b].x;
+                    const dy = particlesArray[a].y - particlesArray[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < maxDistance) {
+                        const opacity = 1 - (distance / maxDistance);
+                        ctx.strokeStyle = rgba(0, 210, 255, ${opacity * 0.15});
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+    </script>
 </body>
 </html>
+
