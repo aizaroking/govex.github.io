@@ -47,13 +47,33 @@
             animation: cardAppear 0.8s ease-out forwards;
         }
 
-        .profile-img {
+        /* حاوية الصورة مع نقطة الحالة */
+        .avatar-container {
+            position: relative;
             width: 90px;
             height: 90px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             border: 2px solid #00d2ff;
             object-fit: cover;
-            animation: glowPulse 2s infinite alternate;
+        }
+
+        /* نقطة الحالة المتغيرة */
+        .status-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 3px solid #04121a;
+            background-color: #747f8d; /* الافتراضي رمادي */
+            transition: background-color 0.3s ease;
         }
 
         h1 {
@@ -177,11 +197,6 @@
             color: #ffffff;
         }
 
-        @keyframes glowPulse {
-            from { box-shadow: 0 0 8px rgba(0, 210, 255, 0.3); }
-            to { box-shadow: 0 0 22px rgba(0, 210, 255, 0.6); }
-        }
-
         @keyframes cardAppear {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -197,7 +212,10 @@
     <canvas id="particles-canvas"></canvas>
 
     <div class="profile-card">
-        <img src="profile.png" alt="Aizaro" class="profile-img">
+        <div class="avatar-container">
+            <img src="profile.png" alt="Aizaro" class="profile-img" id="discord-avatar">
+            <div class="status-dot" id="discord-status"></div>
+        </div>
         
         <h1>AIZARO KING</h1>
         <div class="bio">Gamer & Content Creator</div>
@@ -237,6 +255,45 @@
     </div>
 
     <script>
+        const DISCORD_ID = "1285381904559767594"; 
+
+        async function fetchDiscordStatus() {
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const user = data.data;
+                    
+                    if(user.discord_user.avatar) {
+                        const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.discord_user.avatar}.png?size=256`;
+                        document.getElementById('discord-avatar').src = avatarUrl;
+                    }
+
+                    const statusDot = document.getElementById('discord-status');
+                    switch (user.discord_status) {
+                        case 'online':
+                            statusDot.style.backgroundColor = '#23a55a'; 
+                            break;
+                        case 'idle':
+                            statusDot.style.backgroundColor = '#f0b232'; 
+                            break;
+                        case 'dnd':
+                            statusDot.style.backgroundColor = '#f23f43'; 
+                            break;
+                        default:
+                            statusDot.style.backgroundColor = '#747f8d'; 
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching Discord status:", error);
+            }
+        }
+        
+        fetchDiscordStatus();
+        setInterval(fetchDiscordStatus, 30000); 
+
+        // خلفية الجزيئات المتحركة
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
