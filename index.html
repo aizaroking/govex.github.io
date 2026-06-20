@@ -270,7 +270,7 @@
     <canvas id="particles-canvas"></canvas>
 
     <div class="profile-card">
-        <img src="https://cdn.discordapp.com/avatars/1285381904559767594/40ccf6b216964ef5bc844788107efca6.png?size=256" alt="Aizaro" class="profile-img">
+        <img src="https://api.lanyard.rest/1285381904559767594.png" alt="Aizaro" class="profile-img" id="main-avatar">
         
         <h1>AIZARO KING</h1>
         <div class="bio">Gamer & Content Creator</div>
@@ -310,7 +310,7 @@
 
         <a href="https://discord.com/users/1285381904559767594" target="_blank" class="discord-status-widget">
             <div class="widget-avatar-wrapper">
-                <img src="https://cdn.discordapp.com/avatars/1285381904559767594/40ccf6b216964ef5bc844788107efca6.png?size=256" id="w-avatar" class="widget-avatar" alt="Discord Avatar">
+                <img src="https://api.lanyard.rest/1285381904559767594.png" id="w-avatar" class="widget-avatar" alt="Discord Avatar">
                 <div id="w-status-dot" class="widget-status-dot"></div>
             </div>
             <div class="widget-info">
@@ -349,10 +349,9 @@
                         document.getElementById('w-username').innerText = user.discord_user.username;
                     }
 
-                    if(user.discord_user && user.discord_user.avatar) {
-                        const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.discord_user.avatar}.png?size=256`;
-                        document.getElementById('w-avatar').src = avatarUrl;
-                    }
+                    const avatarUrl = `https://api.lanyard.rest/${DISCORD_ID}.png`;
+                    document.getElementById('w-avatar').src = avatarUrl;
+                    document.getElementById('main-avatar').src = avatarUrl;
 
                     const statusDot = document.getElementById('w-status-dot');
                     const statusText = document.getElementById('w-status-text');
